@@ -10,9 +10,9 @@
     "start": "node dist/app.js",
     "dev-watch": "node --loader ts-node/esm --watch src/app.ts",
     "prepare": "husky install",
-    "lint": "eslint . --ext .ts",
+   "lint": "eslint src/**/*.ts",
     "format": "prettier --write .",
-   "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+   "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage"
   },
   "keywords": [],
   "author": "",
