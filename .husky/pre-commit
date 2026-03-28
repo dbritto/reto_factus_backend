@@ -1,0 +1,36 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Verificar el nombre de la rama antes de permitir el commit
+sh .husky/check-branch.sh
+
+echo "🛡️  Iniciando Escudo de Seguridad..."
+
+# 1. Limpieza de archivos basura
+echo "🧹 Limpiando archivos temporales..."
+rm -rf *.log
+
+# 2. Protección de Secretos (Gitleaks)
+echo "🔑 Buscando secretos expuestos..."
+npx gitleaks detect --source . --staged || exit 1
+
+# 3. Seguridad de Dependencias
+echo "📦 Revisando vulnerabilidades en paquetes..."
+npm audit --audit-level=high || exit 1
+
+# 4. Calidad de Código (Lo que ya tenías)
+echo "✨ Formateando y revisando Lint..."
+npm run format && npm run lint
+
+# 5. Validar que el código compila (TypeScript)
+npm run build
+
+echo "✅ ¡Fortaleza verificada! Procediendo al commit..."
+
+
+
+
+
+
+########
+######## git commit -m "feat: mi mensaje" --no-verify
