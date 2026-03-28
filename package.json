@@ -10,14 +10,15 @@
     "start": "node dist/app.js",
     "dev-watch": "node --loader ts-node/esm --watch src/app.ts",
     "prepare": "husky install",
-   "lint": "eslint src/**/*.ts",
+    "lint": "eslint src/**/*.ts",
     "format": "prettier --write .",
-   "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage"
   },
   "keywords": [],
   "author": "",
   "license": "UNLICENSED",
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@types/express": "^5.0.6",
     "@types/jest": "^30.0.0",
     "@types/node": "^25.5.0",
@@ -26,12 +27,14 @@
     "eslint": "^10.1.0",
     "eslint-config-prettier": "^10.1.8",
     "gitleaks": "^1.0.0",
+    "globals": "^17.4.0",
     "husky": "^9.1.7",
     "jest": "^30.3.0",
     "prettier": "^3.8.1",
     "ts-jest": "^29.4.6",
     "ts-node": "^10.9.2",
-    "typescript": "^6.0.2"
+    "typescript": "^6.0.2",
+    "typescript-eslint": "^8.57.2"
   },
   "dependencies": {
     "express": "^5.2.1"
