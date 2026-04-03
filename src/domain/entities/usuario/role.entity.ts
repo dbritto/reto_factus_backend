@@ -1,4 +1,4 @@
-import { InvalidRoleException } from "../exceptions/role.exceptions.js";
+import { InvalidRoleException } from "../../exceptions/role.exceptions.js";
 
 export class Role {
 

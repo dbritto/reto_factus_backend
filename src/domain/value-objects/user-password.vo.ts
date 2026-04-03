@@ -12,8 +12,10 @@ export class UserPassword {
     }
 
     private validate(password: string): boolean {
-        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-        return passwordRegex.test(password);
+        // Accept plain passwords that satisfy policy OR persisted bcrypt hashes.
+        const plainPasswordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+        const bcryptHashRegex = /^\$2[aby]\$\d{2}\$[./A-Za-z0-9]{53}$/;
+        return plainPasswordRegex.test(password) || bcryptHashRegex.test(password);
     }
 
     public getValue(): string {

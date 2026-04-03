@@ -1,6 +1,6 @@
-import { UserEmail } from "../value-objects/user-email.vo.js";
-import { UserPassword } from "../value-objects/user-password.vo.js";
-import { UserRole } from "../enums/user-role.enum.js";
+import { UserEmail } from "../../value-objects/user-email.vo.js";
+import { UserPassword } from "../../value-objects/user-password.vo.js";
+import { UserRole } from "../../enums/user-role.enum.js";
 
 export interface UserProps {
     id?: string;

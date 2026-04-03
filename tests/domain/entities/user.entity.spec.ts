@@ -1,4 +1,4 @@
-import { User } from "../../../src/domain/entities/user.entity.js";
+import { User } from "../../../src/domain/entities/usuario/user.entity.js";
 import { UserEmail } from "../../../src/domain/value-objects/user-email.vo.js";
 import { UserPassword } from "../../../src/domain/value-objects/user-password.vo.js";
 import { UserRole } from "../../../src/domain/enums/user-role.enum.js";

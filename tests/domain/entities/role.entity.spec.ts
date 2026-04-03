@@ -1,5 +1,5 @@
 import { describe, expect, it } from "@jest/globals";
-import { Role } from "../../../src/domain/entities/role.entity.js";
+import { Role } from "../../../src/domain/entities/usuario/role.entity.js";
 import { InvalidRoleException } from "../../../src/domain/exceptions/role.exceptions.js";
 
 describe("Role Entity", () => {
