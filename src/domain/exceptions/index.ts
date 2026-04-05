@@ -10,3 +10,7 @@ export {
   InvalidRoleException,
   UnauthorizedException,
 } from "./role.exceptions.js";
+
+export {
+  ProductoNotFoundException,
+} from "./producto.exceptions.js";

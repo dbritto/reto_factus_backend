@@ -48,6 +48,9 @@ describe("app bootstrap", () => {
     jest.unstable_mockModule("../src/infrastructure/repositories/pg-refresh-token.repository.js", () => ({
       PgRefreshTokenRepository: jest.fn(() => ({})),
     }));
+    jest.unstable_mockModule("../src/infrastructure/repositories/pg-producto.repository.js", () => ({
+      PgProductoRepository: jest.fn(() => ({})),
+    }));
     jest.unstable_mockModule("../src/infrastructure/services/bcrypt-password-hasher.js", () => ({
       BcryptPasswordHasher: jest.fn(() => ({})),
     }));
@@ -63,11 +66,29 @@ describe("app bootstrap", () => {
     jest.unstable_mockModule("../src/application/use-cases/auth/refresh_token.use_case.js", () => ({
       RefreshTokenUseCase: jest.fn(() => ({})),
     }));
+    jest.unstable_mockModule("../src/application/use-cases/producto/create-producto.use_case.js", () => ({
+      CreateProductoUseCase: jest.fn(() => ({})),
+    }));
+    jest.unstable_mockModule("../src/application/use-cases/producto/get-producto.use_case.js", () => ({
+      GetProductoUseCase: jest.fn(() => ({})),
+    }));
+    jest.unstable_mockModule("../src/application/use-cases/producto/list-productos.use_case.js", () => ({
+      ListProductosUseCase: jest.fn(() => ({})),
+    }));
+    jest.unstable_mockModule("../src/application/use-cases/producto/update-producto.use_case.js", () => ({
+      UpdateProductoUseCase: jest.fn(() => ({})),
+    }));
+    jest.unstable_mockModule("../src/application/use-cases/producto/delete-producto.use_case.js", () => ({
+      DeleteProductoUseCase: jest.fn(() => ({})),
+    }));
     jest.unstable_mockModule("../src/presentation/controller/auth.controller.js", () => ({
       AuthController: jest.fn(() => ({})),
     }));
     jest.unstable_mockModule("../src/presentation/routes/auth.routes.js", () => ({
       buildAuthRouter: jest.fn(() => ({})),
+    }));
+    jest.unstable_mockModule("../src/presentation/routes/producto.routes.js", () => ({
+      buildProductoRouter: jest.fn(() => ({})),
     }));
 
     await import("../src/app.js");
@@ -104,24 +125,38 @@ describe("app bootstrap", () => {
     const dbClientInstance = { name: "db-client" };
     const userRepoInstance = { name: "user-repo" };
     const refreshRepoInstance = { name: "refresh-repo" };
+    const productoRepoInstance = { name: "producto-repo" };
     const hasherInstance = { name: "hasher" };
     const tokenServiceInstance = { name: "token-service" };
     const loginUseCaseInstance = { name: "login-uc" };
     const registerUseCaseInstance = { name: "register-uc" };
     const refreshUseCaseInstance = { name: "refresh-uc" };
+    const createProductoUseCaseInstance = { name: "create-producto-uc" };
+    const getProductoUseCaseInstance = { name: "get-producto-uc" };
+    const listProductosUseCaseInstance = { name: "list-productos-uc" };
+    const updateProductoUseCaseInstance = { name: "update-producto-uc" };
+    const deleteProductoUseCaseInstance = { name: "delete-producto-uc" };
     const authControllerInstance = { name: "auth-controller" };
     const authRouter = { name: "auth-router" };
+    const productoRouter = { name: "producto-router" };
 
     const PgDatabaseClientMock: jest.Mock = jest.fn(() => dbClientInstance);
     const PgUserRepositoryMock: jest.Mock = jest.fn(() => userRepoInstance);
     const PgRefreshTokenRepositoryMock: jest.Mock = jest.fn(() => refreshRepoInstance);
+    const PgProductoRepositoryMock: jest.Mock = jest.fn(() => productoRepoInstance);
     const BcryptPasswordHasherMock: jest.Mock = jest.fn(() => hasherInstance);
     const JwtServiceMock: jest.Mock = jest.fn(() => tokenServiceInstance);
     const LoginUseCaseMock: jest.Mock = jest.fn(() => loginUseCaseInstance);
     const RegisterUseCaseMock: jest.Mock = jest.fn(() => registerUseCaseInstance);
     const RefreshTokenUseCaseMock: jest.Mock = jest.fn(() => refreshUseCaseInstance);
+    const CreateProductoUseCaseMock: jest.Mock = jest.fn(() => createProductoUseCaseInstance);
+    const GetProductoUseCaseMock: jest.Mock = jest.fn(() => getProductoUseCaseInstance);
+    const ListProductosUseCaseMock: jest.Mock = jest.fn(() => listProductosUseCaseInstance);
+    const UpdateProductoUseCaseMock: jest.Mock = jest.fn(() => updateProductoUseCaseInstance);
+    const DeleteProductoUseCaseMock: jest.Mock = jest.fn(() => deleteProductoUseCaseInstance);
     const AuthControllerMock: jest.Mock = jest.fn(() => authControllerInstance);
     const buildAuthRouterMock: jest.Mock = jest.fn(() => authRouter);
+    const buildProductoRouterMock: jest.Mock = jest.fn(() => productoRouter);
 
     jest.unstable_mockModule("dotenv/config", () => ({}));
     jest.unstable_mockModule("express", () => ({ default: expressMock }));
@@ -133,6 +168,9 @@ describe("app bootstrap", () => {
     }));
     jest.unstable_mockModule("../src/infrastructure/repositories/pg-refresh-token.repository.js", () => ({
       PgRefreshTokenRepository: PgRefreshTokenRepositoryMock,
+    }));
+    jest.unstable_mockModule("../src/infrastructure/repositories/pg-producto.repository.js", () => ({
+      PgProductoRepository: PgProductoRepositoryMock,
     }));
     jest.unstable_mockModule("../src/infrastructure/services/bcrypt-password-hasher.js", () => ({
       BcryptPasswordHasher: BcryptPasswordHasherMock,
@@ -149,11 +187,29 @@ describe("app bootstrap", () => {
     jest.unstable_mockModule("../src/application/use-cases/auth/refresh_token.use_case.js", () => ({
       RefreshTokenUseCase: RefreshTokenUseCaseMock,
     }));
+    jest.unstable_mockModule("../src/application/use-cases/producto/create-producto.use_case.js", () => ({
+      CreateProductoUseCase: CreateProductoUseCaseMock,
+    }));
+    jest.unstable_mockModule("../src/application/use-cases/producto/get-producto.use_case.js", () => ({
+      GetProductoUseCase: GetProductoUseCaseMock,
+    }));
+    jest.unstable_mockModule("../src/application/use-cases/producto/list-productos.use_case.js", () => ({
+      ListProductosUseCase: ListProductosUseCaseMock,
+    }));
+    jest.unstable_mockModule("../src/application/use-cases/producto/update-producto.use_case.js", () => ({
+      UpdateProductoUseCase: UpdateProductoUseCaseMock,
+    }));
+    jest.unstable_mockModule("../src/application/use-cases/producto/delete-producto.use_case.js", () => ({
+      DeleteProductoUseCase: DeleteProductoUseCaseMock,
+    }));
     jest.unstable_mockModule("../src/presentation/controller/auth.controller.js", () => ({
       AuthController: AuthControllerMock,
     }));
     jest.unstable_mockModule("../src/presentation/routes/auth.routes.js", () => ({
       buildAuthRouter: buildAuthRouterMock,
+    }));
+    jest.unstable_mockModule("../src/presentation/routes/producto.routes.js", () => ({
+      buildProductoRouter: buildProductoRouterMock,
     }));
 
     await import("../src/app.js");
@@ -167,6 +223,7 @@ describe("app bootstrap", () => {
     expect(PgDatabaseClientMock).toHaveBeenCalledTimes(1);
     expect(PgUserRepositoryMock).toHaveBeenCalledWith(dbClientInstance);
     expect(PgRefreshTokenRepositoryMock).toHaveBeenCalledWith(dbClientInstance);
+    expect(PgProductoRepositoryMock).toHaveBeenCalledWith(dbClientInstance);
     expect(BcryptPasswordHasherMock).toHaveBeenCalledTimes(1);
     expect(JwtServiceMock).toHaveBeenCalledTimes(1);
 
@@ -182,6 +239,11 @@ describe("app bootstrap", () => {
       userRepoInstance,
       tokenServiceInstance
     );
+    expect(CreateProductoUseCaseMock).toHaveBeenCalledWith(productoRepoInstance);
+    expect(GetProductoUseCaseMock).toHaveBeenCalledWith(productoRepoInstance);
+    expect(ListProductosUseCaseMock).toHaveBeenCalledWith(productoRepoInstance);
+    expect(UpdateProductoUseCaseMock).toHaveBeenCalledWith(productoRepoInstance);
+    expect(DeleteProductoUseCaseMock).toHaveBeenCalledWith(productoRepoInstance);
     expect(AuthControllerMock).toHaveBeenCalledWith(
       loginUseCaseInstance,
       registerUseCaseInstance,
@@ -190,6 +252,14 @@ describe("app bootstrap", () => {
 
     expect(buildAuthRouterMock).toHaveBeenCalledWith(authControllerInstance);
     expect(appMock.use).toHaveBeenCalledWith("/api/auth", authRouter);
+    expect(buildProductoRouterMock).toHaveBeenCalledWith({
+      createProductoUseCase: createProductoUseCaseInstance,
+      getProductoUseCase: getProductoUseCaseInstance,
+      listProductosUseCase: listProductosUseCaseInstance,
+      updateProductoUseCase: updateProductoUseCaseInstance,
+      deleteProductoUseCase: deleteProductoUseCaseInstance,
+    });
+    expect(appMock.use).toHaveBeenCalledWith("/api/productos", productoRouter);
     expect(appMock.listen).toHaveBeenCalledWith("4001", expect.any(Function));
     expect(logSpy).toHaveBeenCalledWith("Server is running on port 4001");
   });
