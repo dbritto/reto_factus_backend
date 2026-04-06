@@ -16,27 +16,27 @@ Servicio de autenticación desarrollado en **TypeScript** con Node.js.
 ## Instalación
 
 ```bash
-npm install --legacy-peer-deps
+npm install 
 ```
 
 ### Regla para instalar dependencias
 
-Como el proyecto usa una versión reciente de TypeScript, para evitar conflictos de dependencias, **toda instalación** de paquetes debe incluir `--legacy-peer-deps`.
+Como el proyecto usa una versión reciente de TypeScript, para evitar conflictos de dependencias, **toda instalación** de paquetes debe incluir .
 
 Ejemplos:
 
 ```bash
 # Dependencias de desarrollo
-npm install --save-dev eslint prettier --legacy-peer-deps
+npm install --save-dev eslint prettier
 ```
 
 ```bash
-npm install --save-dev jest ts-jest @types/jest --legacy-peer-deps
+npm install --save-dev jest ts-jest @types/jest
 ```
 
 ```bash
 # Dependencias de producción
-npm install express --legacy-peer-deps
+npm install express
 ```
 
 ## Scripts disponibles
